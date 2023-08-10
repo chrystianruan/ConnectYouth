@@ -22,6 +22,14 @@ const AuthService = {
     return this.state.token;
   },
 
+  existToken(){
+    if (this.state.token) {
+      return true;
+    }
+    return false;
+    
+  },
+
   removeToken() {
     this.state.token = null;
     VueCookie.delete('cookieToken');

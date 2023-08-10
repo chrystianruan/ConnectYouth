@@ -1,34 +1,31 @@
 <template>
   <main>
-    <form @submit.prevent="registerEvent">
+    <form @submit.prevent="registerEvent" enctype="multipart/form-data">
       <h1>Cadastrar Evento</h1>
 
-      <label for="title">Título</label>
-      <input type="text" name="title" id="title" v-model="title">
+      <label for="titulo">Título</label>
+      <input type="text" name="titulo" id="titulo" v-model="title">
 
       <label for="descricao">Descrição</label>
-      <textarea name="descricao" id="descricao" cols="30" rows="10" v-model="descricao"></textarea>
+      <textarea name="descricao" id="descricao" v-model="descricao" cols="30" rows="10"></textarea>
 
-      <label for="banner">Banner</label>
-      <input type="file" name="banner" id="banner" v-on:change="banner">
+      <label for="myBanner">Banner</label>
+      <input type="file" @change="fileValue($event)" accept="image/*" capture />
 
       <label for="freeEvent">Evento gratuito?</label>
       <div class="inpRadios">
         <p>Gratis</p>
-        <input type="radio" name="freeEvent" id="freeEvent" v-model="freeEvent" :checked="this.freeEvent == true" :value="true">
+        <input type="radio" name="freeEvent" id="freeEvent" v-model="freeEvent" :checked="freeEvent == true" :value="true">
         <p>Pago</p>
-        <input type="radio" name="freeEvent" id="freeEvent" v-model="freeEvent" :checked="this.freeEvent == false" :value="false">
+        <input type="radio" name="freeEvent" id="freeEvent" v-model="freeEvent" :checked="freeEvent == false" :value="false">
       </div>
 
-      <div v-show="this.freeEvent == false">
+      <div v-show="freeEvent == false">
         <label for="price">Preço</label>
         <input type="number" name="price" id="price" v-model="price">
       </div>
 
-      <label for="loc">localização</label>
-      <input type="text" name="loc" id="loc" v-model="loc">
-
-      <Map />
+      <Map @loc="setLoc" />
 
 
       <input type="submit" name="register" id="register" value="Cadastrar">
@@ -36,44 +33,74 @@
   </main>
 </template>
 
-<script>
+<script setup>
   import Map from '../components/formItems/InputMap.vue'
+  import { ref } from 'vue'
+  import AuthService from '../services/AuthServices';
 
-  export default {
-    data() {
-      return {
-        title: null,
-        descricao: null,
-        banner: null,
-        freeEvent: true,
-        price: null,
-        loc: null,
-      }
-      
-    },
-    components: {
-        Map
-      },
-    methods: {
-      registerEvent() {
-        if(this.freeEvent == true) {
-          this.price = 0
-        }
-        console.log(this.title);
-        console.log('----');
-        console.log(this.descricao);
-        console.log('----');
-        console.log(this.banner);
-        console.log('----');
-        console.log(this.freeEvent);
-        console.log('----');
-        console.log(this.price);
-        console.log('----');
-        console.log(this.loc);
-        console.log('----');
-      }
+  const baseURL = 'https://apiconnectyouth.up.railway.app/api'
+
+  //input title
+  const title = ref('')
+
+  //input descricao
+  const descricao = ref('')
+
+  //input file
+  let fileName = ref(null)
+
+  function fileValue(e) {
+    if(e.target.files[0] != null) {
+      fileName.value = e.target.files[0]
+    }else{
+      fileName.value = ""
     }
   }
+
+  //input free event
+  const freeEvent = ref(true)
+
+  //input price
+  const price = ref(0)
+
+  //loc map
+  const location = ref(null)
+
+  function setLoc(loc) {
+    location.value = loc;
+  }
+
+  async function registerEvent() {
+
+    const eventFormData = new FormData()
+
+    eventFormData.append('image', fileName.value)
+    eventFormData.append('title', title.value)
+    eventFormData.append('description', descricao.value)
+    eventFormData.append('free', freeEvent.value)
+    eventFormData.append('price', price.value)
+    eventFormData.append('location', location.value)
+
+    const authToken = AuthService.getToken()
+
+    const req = await fetch(`${baseURL}/new-event`, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${authToken}`
+      },
+      body: eventFormData,
+      
+    })
+
+    const res = await req.json();
+
+    if(req.status == 201) {
+      console.log(res.response);
+    }
+    
+  }
+  
+  
 </script>
 
 <style>

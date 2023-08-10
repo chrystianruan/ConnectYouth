@@ -25,7 +25,7 @@
       return {
         userEmail: null,
         userPassword: null,
-        URL: 'https://apiconnectyouth.up.railway.app'
+        baseURL: 'https://apiconnectyouth.up.railway.app/api'
       }
     },
     methods: {
@@ -37,7 +37,7 @@
 
         const userJson = JSON.stringify(user)
 
-        const req = await fetch(`${this.URL}/api/logon`, {
+        const req = await fetch(`${this.baseURL}/logon`, {
             method: "POST",
             headers: {"Content-type": "application/json"},
             body: userJson

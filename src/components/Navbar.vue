@@ -6,30 +6,35 @@
     <router-link to="/login">
       <p>Entrar <i class="fa-solid fa-arrow-right"></i></p>
     </router-link>
-    <a @click="logout">
+    <a @click="logout" >
       <p>LogOut</p>
     </a>
   </nav>
 </template>
 
-<script>
+<script setup>
   import AuthService from '../services/AuthServices';
+  import { ref, watch, onMounted } from 'vue'
+  import { useRouter } from 'vue-router'
 
-  export default {
-    name: 'Navbar',
-    data(){
-      return {
-      }
-    },
-    
-    methods: {
-      logout(){
-        AuthService.removeToken()
-        this.$router.push({name: 'login'})
-      },
-    },
-    
+  const router = useRouter()
+  // const isAuth = ref(AuthService.existToken())
+
+
+  function logout(){
+    AuthService.removeToken()
+    router.push({
+      name: 'login'
+    })
   }
+ 
+</script>
+
+<script>
+  export default {
+      name: 'Navbar'
+    
+    }
 </script>
 
 <style scoped>
@@ -43,7 +48,7 @@
     align-items: center;
     gap: 1.2em;
     position: fixed;
-    z-index: 100;
+    z-index: 10;
     background-color: white;
 
   }

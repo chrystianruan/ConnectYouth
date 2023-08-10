@@ -2,18 +2,18 @@
   <div ref="mapContainer" class="map-container"></div>
 </template>
 
-<script>
+<script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import axios from 'axios';
 
-export default {
-  name: 'Map',
-  setup() {
+
     const mapContainer = ref(null);
     let map;
     let marker = null; // Variável para armazenar o marcador atual
+    let address;
+    let emits = defineEmits(['loc'])
 
     onMounted(() => {
       // Coordenadas iniciais do mapa
@@ -33,7 +33,6 @@ export default {
         const { lat, lng } = event.latlng;
         // Chame o método para adicionar o marcador na posição clicada, passando as coordenadas
         addMarker(lat, lng);
-        console.log(`${lat} - ${lng}`);
       });
     });
 
@@ -51,7 +50,7 @@ export default {
 
       try {
         const response = await axios.get(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
-        const address = response.data.display_name;
+        address = response.data.display_name;
         // Adiciona marcador no mapa com o ícone personalizado
         marker = L.marker([latitude, longitude], {
           icon: L.icon({
@@ -60,27 +59,32 @@ export default {
             iconAnchor: [16, 32], // Substitua pelo ponto de ancoragem do ícone (onde ele será fixado no mapa)
           }),
         }).addTo(map);
+
         marker.bindPopup(`<b>${address}</b><br>Latitude: ${latitude}<br>Longitude: ${longitude}`).openPopup();
       
-        
       
       } catch (error) {
         console.error('Erro ao obter o endereço:', error);
       }
 
 
-
+      emits('loc', address)
 
       
     }
 
-    return { mapContainer };
-  },
-};
+  
+</script>
+
+<script>
+  export default {
+    name: 'Map'
+  }
 </script>
 
 <style>
 .map-container {
   height: 500px;
+  z-index: 1;
 }
 </style>
