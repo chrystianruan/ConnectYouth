@@ -13,7 +13,7 @@
     <div class="container-event" v-for="event in events" :key="event.id" v-if="events.length != 0">
       <img src="" alt="imagem">
       <div class="events-info">
-        <h2>{{ event.title }}</h2>
+        <h2>{{ event.title.toUpperCase() }}</h2>
         <p>{{ event.description }}</p>
       <button class="button">Participar</button>
 
@@ -96,9 +96,10 @@
   }
 
   .events-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 5fr 1fr;
+    text-align: center;
     border-left: 1px solid rgb(173, 173, 173);
   }
 
@@ -147,6 +148,9 @@
  text-transform: uppercase;
  color: var(--color);
  z-index: 1;
+ max-width: 300px;
+ min-width: 250px;
+ margin: auto;
 }
 
 .button::before, .button::after {

@@ -3,12 +3,13 @@
     <router-link to="/">
       Inicio
     </router-link>
-    <router-link to="/login">
-      <p>Entrar <i class="fa-solid fa-arrow-right"></i></p>
-    </router-link>
-    <a @click="logout" >
+    <a @click="logout" v-if="isAuth">
       <p>LogOut</p>
     </a>
+    <router-link to="/login" v-else>
+      <p>Entrar <i class="fa-solid fa-arrow-right"></i></p>
+    </router-link>
+
   </nav>
 </template>
 
@@ -18,11 +19,24 @@
   import { useRouter } from 'vue-router'
 
   const router = useRouter()
-  // const isAuth = ref(AuthService.existToken())
+  const isAuth = ref(AuthService.existToken())
+
+  const props = defineProps(['authentication'])
+  const emits = defineEmits(['removeLogin'])
+
+ watch(() => props.authentication, (newValue, oldValue) => {
+  if(newValue == false){
+    isAuth.value = false
+    return
+  }
+  isAuth.value = AuthService.existToken()
+
+ })
 
 
   function logout(){
     AuthService.removeToken()
+    emits('removeLogin')
     router.push({
       name: 'login'
     })

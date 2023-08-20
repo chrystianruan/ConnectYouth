@@ -1,28 +1,33 @@
 <template>
-  <Navbar />
-  <RouterView/>
+  <Navbar :authentication='verify_isAuth' @removeLogin="removeLoginFunction" />
+  <RouterView @sendAuth="logVal"/>
   <MyFooter />
 </template>
 
-<script>
+<script setup>
   import { RouterView } from 'vue-router'
   import Navbar from './components/Navbar.vue'
   import MyFooter from './components/Footer.vue'
+  import { ref } from 'vue'
 
-  export default {
+  let verify_isAuth = ref(false);
+
+  function logVal(isAuthValue) {
+    verify_isAuth.value = isAuthValue
+    
+  }
+  function removeLoginFunction(){
+    logVal(false)
+  }
+
+  
+</script>
+
+<script>
+export default {
     name: 'app',
-    data() {
-      return {
-        userAuth: false,
-      }
-    },
-    components: {
-      Navbar,
-      MyFooter
-    },
-    methods: {
-      
-    }
+  
+   
   }
 </script>
 

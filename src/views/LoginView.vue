@@ -3,10 +3,10 @@
     <form @submit.prevent="Login">
       <h1>Entrar</h1>
       <label for="userEmail">Email</label>
-      <input type="email" name="userEmail" id="userEmail" v-model="userEmail" placeholder="Email do usuario">
+      <input type="email" name="userEmail" id="userEmail" v-model="userEmail" placeholder="usuario@email.com">
       
       <label for="userPassword">Senha</label>
-      <input type="password" name="userPassword" id="userPassword" v-model="userPassword" placeholder="Senha">
+      <input type="password" name="userPassword" id="userPassword" v-model="userPassword" placeholder="Insira sua senha">
   
       <input type="submit" name="btnRegister" id="btnRegister" value="Entrar">
 
@@ -15,44 +15,46 @@
   </main>
 </template>
 
-<script>
+<script setup>
   
   import AuthService from '../services/AuthServices';
+  import { ref } from 'vue'
+  import { useRouter } from 'vue-router'
 
-  export default {
-    
-    data(){
-      return {
-        userEmail: null,
-        userPassword: null,
-        baseURL: 'https://apiconnectyouth.up.railway.app/api'
-      }
-    },
-    methods: {
-      async Login() {
-        const user = {
-          email: this.userEmail,
-          password: this.userPassword
-        }
+  const userEmail = ref(null)
+  const userPassword = ref(null)
+  const baseURL = 'https://apiconnectyouth.up.railway.app/api'
 
-        const userJson = JSON.stringify(user)
+  const router = useRouter()
 
-        const req = await fetch(`${this.baseURL}/logon`, {
-            method: "POST",
-            headers: {"Content-type": "application/json"},
-            body: userJson
-          })
+  const emits = defineEmits(['sendAuth'])
+ 
+ 
+  async function Login() {
+    const user = {
+      email: userEmail.value,
+      password: userPassword.value
+    }
 
-        const res = await req.json();
+    const userJson = JSON.stringify(user)
 
-        AuthService.setToken(res.token)
+    const req = await fetch(`${baseURL}/logon`, {
+        method: "POST",
+        headers: {"Content-type": "application/json"},
+        body: userJson
+      })
 
-        if(req.status == 200){
-          this.$router.push({name: 'home'})
-        }
-      }
+    const res = await req.json();
+
+    AuthService.setToken(res.token)
+
+    if(req.status == 200){
+      router.push({name: 'home'})
+      emits('sendAuth', true)
     }
   }
+    
+  
 </script>
 
 <style scoped>
