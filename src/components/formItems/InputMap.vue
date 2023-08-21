@@ -78,11 +78,11 @@ import axios from 'axios';
 
 <script>
   export default {
-    name: 'Map'
+    name: 'InpMap'
   }
 </script>
 
-<style>
+<style scoped>
 .map-container {
   height: 500px;
   z-index: 1;

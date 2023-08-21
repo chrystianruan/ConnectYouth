@@ -25,7 +25,7 @@
         <input type="number" name="price" id="price" v-model="price">
       </div>
 
-      <Map @loc="setLoc" />
+      <InpMap @loc="setLoc" />
 
 
       <input type="submit" name="register" id="register" value="Cadastrar">
@@ -34,7 +34,7 @@
 </template>
 
 <script setup>
-  import Map from '../components/formItems/InputMap.vue'
+  import InpMap from '../components/formItems/InputMap.vue'
   import { ref } from 'vue'
   import AuthService from '../services/AuthServices';
 

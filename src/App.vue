@@ -35,7 +35,6 @@ export default {
  main {
     display: flex;
     justify-content: center;
-    padding: 8em 0;
     min-height: calc(90vh);
   }
 </style>
