@@ -27,7 +27,7 @@ const router = createRouter({
     {
       path: '/eventRegister',
       name: 'eventRegister',
-      component: () => import('../views/eventRegisterView.vue')
+      component: () => import('../views/EventRegisterView.vue')
     }
   ]
 })

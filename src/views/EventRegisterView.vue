@@ -10,7 +10,7 @@
       <textarea name="descricao" id="descricao" v-model="descricao" cols="30" rows="10"></textarea>
 
       <label for="myBanner">Banner</label>
-      <input type="file" @change="fileValue($event)"/>
+      <input type="file" @change="fileValue($event)" accept="image/*" capture />
 
       <label for="freeEvent">Evento gratuito?</label>
       <div class="inpRadios">
