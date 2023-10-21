@@ -34,6 +34,10 @@ export default {
         "80vh": "80vh",
         "90vh": "90vh",
       },
+
+      minHeight: {
+        minC: "580px",
+      },
     },
   },
   plugins: [],

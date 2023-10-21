@@ -4,7 +4,7 @@
   >
     <form
       @submit.prevent="Login"
-      class="bg-white drop-shadow-xl rounded-xl w-80% h-60vh flex flex-col p-4 max-w-xl gap-4 items-center"
+      class="bg-white drop-shadow-xl rounded-xl w-80% h-auto min-h-minC flex flex-col p-4 max-w-xl gap-4 items-center"
     >
       <h1>Entrar</h1>
       <div class="w-full flex flex-col">
