@@ -1,12 +1,10 @@
 <template>
   <main>
-    <MySlider />
     <LocMap />
   </main>
 </template>
 
 <script setup>
-import MySlider from "../components/Slider.vue";
 import LocMap from "../components/LocMap.vue";
 </script>
 
