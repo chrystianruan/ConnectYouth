@@ -1,18 +1,25 @@
 <template>
-  <section id="loc">
-    <div class="textMap">
-      <h2>Localização</h2>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit debitis,
-        iure veniam perferendis dolorum beatae itaque accusamus quia sunt nulla
-        vitae nisi commodi voluptatum? Sed dolore esse necessitatibus
-        repellendus deserunt!
+  <div
+    class="p-8 flex justify-around items-center flex-wrap gap-4 w-full border"
+  >
+    <div class="w-1/2">
+      <h2 class="text-2xl md:text-3xl xl:text-5xl font-semibold">
+        Onde nos <br />
+        encontrar?
+      </h2>
+      <p class="text-justify text-base font-thin">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam
+        voluptatum earum deleniti nemo repellendus ratione aliquam voluptate
+        aliquid laborum quaerat, dolor consequatur atque, nostrum saepe, alias
+        accusamus perferendis odio unde! Lorem, ipsum dolor sit amet consectetur
+        adipisicing elit. Fugiat quisquam aliquid eos cum eaque est ex aut?
+        Eveniet vitae ipsum neque optio itaque adipisci totam praesentium vero.
+        Iure, illo excepturi!
       </p>
     </div>
-    <div class="map">
-      <BoxMap />
-    </div>
-  </section>
+
+    <BoxMap class="w-1/2" />
+  </div>
 </template>
 
 <script setup>
@@ -25,7 +32,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<!-- <style scoped>
 /* section loc */
 #loc {
   background-color: white;
@@ -62,4 +69,4 @@ h2 {
 p {
   font-size: 1.2em;
 }
-</style>
+</style> -->

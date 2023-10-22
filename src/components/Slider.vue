@@ -1,190 +1,160 @@
 <template>
-  <section id="home" class="slider">
-    <div class="slider-content">
-      <input type="radio" name="btn-radio" id="radio1" />
-      <input type="radio" name="btn-radio" id="radio2" />
-      <input type="radio" name="btn-radio" id="radio3" />
-      <input type="radio" name="btn-radio" id="radio4" />
+  <div class="carousel relative shadow-2xl bg-white">
+    <div
+      class="carousel-inner relative overflow-hidden w-full max-w-full min-h-70vh"
+    >
+      <!--Slide 1-->
+      <input
+        class="carousel-open"
+        type="radio"
+        id="carousel-1"
+        name="carousel"
+        aria-hidden="true"
+        hidden=""
+        checked="checked"
+      />
+      <div class="carousel-item absolute opacity-0 h-70vh max-h-70vh">
+        <div
+          class="block h-full w-full bg-indigo-500 text-white text-5xl text-center"
+        >
+          <img src="" alt="" />
+        </div>
+      </div>
+      <label
+        for="carousel-3"
+        class="prev control-1 w-10 h-10 ml-2 md:ml-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-blue-700 leading-tight text-center z-10 inset-y-0 left-0 my-auto"
+        >‹</label
+      >
+      <label
+        for="carousel-2"
+        class="next control-1 w-10 h-10 mr-2 md:mr-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-blue-700 leading-tight text-center z-10 inset-y-0 right-0 my-auto"
+        >›</label
+      >
 
-      <div class="slide-box primeiro">
-        <img
-          class="img-desktop"
-          src="../../public/imgs/img1.jpg"
-          alt="slide image"
-        />
+      <!--Slide 2-->
+      <input
+        class="carousel-open"
+        type="radio"
+        id="carousel-2"
+        name="carousel"
+        aria-hidden="true"
+        hidden=""
+      />
+      <div class="carousel-item absolute opacity-0 h-70vh max-h-70vh">
+        <div
+          class="block h-full w-full bg-orange-500 text-white text-5xl text-center"
+        >
+          <img src="" alt="" />
+        </div>
       </div>
-      <div class="slide-box">
-        <img
-          class="img-desktop"
-          src="../../public/imgs/img2.jpg"
-          alt="slide image"
-        />
-      </div>
-      <div class="slide-box">
-        <img
-          class="img-desktop"
-          src="../../public/imgs/img3.jpg"
-          alt="slide image"
-        />
-      </div>
-      <div class="slide-box">
-        <img
-          class="img-desktop"
-          src="../../public/imgs/img4.jpg"
-          alt="slide image"
-        />
-      </div>
+      <label
+        for="carousel-1"
+        class="prev control-2 w-10 h-10 ml-2 md:ml-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-blue-700 leading-tight text-center z-10 inset-y-0 left-0 my-auto"
+        >‹</label
+      >
+      <label
+        for="carousel-3"
+        class="next control-2 w-10 h-10 mr-2 md:mr-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-blue-700 leading-tight text-center z-10 inset-y-0 right-0 my-auto"
+        >›</label
+      >
 
-      <div class="nav-auto">
-        <div class="auto-btn1"></div>
-        <div class="auto-btn2"></div>
-        <div class="auto-btn3"></div>
-        <div class="auto-btn4"></div>
+      <!--Slide 3-->
+      <input
+        class="carousel-open"
+        type="radio"
+        id="carousel-3"
+        name="carousel"
+        aria-hidden="true"
+        hidden=""
+      />
+      <div class="carousel-item absolute opacity-0 h-70vh max-h-70vh">
+        <div
+          class="block h-full w-full bg-green-500 text-white text-5xl text-center"
+        >
+          <img src="" alt="" />
+        </div>
       </div>
+      <label
+        for="carousel-2"
+        class="prev control-3 w-10 h-10 ml-2 md:ml-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-blue-700 leading-tight text-center z-10 inset-y-0 left-0 my-auto"
+        >‹</label
+      >
+      <label
+        for="carousel-1"
+        class="next control-3 w-10 h-10 mr-2 md:mr-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-blue-700 leading-tight text-center z-10 inset-y-0 right-0 my-auto"
+        >›</label
+      >
 
-      <div class="nav-manual">
-        <label for="radio1" class="manual-btn"></label>
-        <label for="radio2" class="manual-btn"></label>
-        <label for="radio3" class="manual-btn"></label>
-        <label for="radio4" class="manual-btn"></label>
-      </div>
+      <!-- Add additional indicators for each slide-->
+      <ol class="carousel-indicators">
+        <li class="inline-block mr-3">
+          <label
+            for="carousel-1"
+            class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-blue-700"
+            >•</label
+          >
+        </li>
+        <li class="inline-block mr-3">
+          <label
+            for="carousel-2"
+            class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-blue-700"
+            >•</label
+          >
+        </li>
+        <li class="inline-block mr-3">
+          <label
+            for="carousel-3"
+            class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-blue-700"
+            >•</label
+          >
+        </li>
+      </ol>
     </div>
-  </section>
+  </div>
 </template>
 
-<script setup>
-import { onMounted } from "vue";
-
-// slider carroussel
-
-onMounted(() => {
-  let count = 1;
-
-  document.getElementById("radio1").checked = true;
-
-  const nextImg = () => {
-    count++;
-
-    if (count > 4) {
-      count = 1;
-    }
-
-    document.getElementById(`radio${count}`).checked = true;
-  };
-
-  setInterval(() => {
-    nextImg();
-  }, 20000);
-});
-// - - - - - - -
-</script>
-
-<script>
-export default {
-  name: "MySlider",
-};
-</script>
+<script setup></script>
 
 <style scoped>
-/* slide carrossel */
-
-.slider {
+.carousel-open:checked + .carousel-item {
+  position: static;
+  opacity: 100;
+}
+.carousel-item {
+  -webkit-transition: opacity 0.6s ease-out;
+  transition: opacity 0.6s ease-out;
+}
+#carousel-1:checked ~ .control-1,
+#carousel-2:checked ~ .control-2,
+#carousel-3:checked ~ .control-3 {
+  display: block;
+}
+.carousel-indicators {
+  list-style: none;
   margin: 0;
-  widows: 100%;
-  height: 100vh;
-  padding: 0 !important;
-  overflow: hidden;
-}
-
-.slider-content {
-  width: 500%;
-  height: 100vh;
-  display: flex;
-}
-
-.slider-content input,
-.img-mobile {
-  display: none;
-}
-
-.slide-box {
-  width: 25%;
-  height: auto;
-  position: relative;
-  text-align: center;
-  transition: 0.5s;
-}
-
-.slide-box img {
-  width: 100%;
-  height: 100%;
-  flex-shrink: 0;
-}
-
-.nav-manual,
-.nav-auto {
+  padding: 0;
   position: absolute;
-  bottom: 1em;
-  width: 100%;
-  display: flex;
-  justify-content: center;
+  bottom: 2%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 10;
 }
-
-.nav-manual .manual-btn,
-.nav-auto div {
-  border: 1px solid #fff;
-  padding: 10px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: 0.2s;
+#carousel-1:checked
+  ~ .control-1
+  ~ .carousel-indicators
+  li:nth-child(1)
+  .carousel-bullet,
+#carousel-2:checked
+  ~ .control-2
+  ~ .carousel-indicators
+  li:nth-child(2)
+  .carousel-bullet,
+#carousel-3:checked
+  ~ .control-3
+  ~ .carousel-indicators
+  li:nth-child(3)
+  .carousel-bullet {
+  color: #2b6cb0; /*Set to match the Tailwind colour you want the active one to be */
 }
-.nav-manual .manual-btn:not(:last-child),
-.nav-auto div:not(:last-child) {
-  margin-right: 1em;
-}
-
-.nav-manual .manual-btn:hover {
-  background-color: #fff;
-}
-
-#radio1:checked ~ .nav-auto .auto-btn1 {
-  background-color: #fff;
-}
-#radio2:checked ~ .nav-auto .auto-btn2 {
-  background-color: #fff;
-}
-#radio3:checked ~ .nav-auto .auto-btn3 {
-  background-color: #fff;
-}
-#radio4:checked ~ .nav-auto .auto-btn4 {
-  background-color: #fff;
-}
-
-#radio1:checked ~ .primeiro {
-  margin-left: 0%;
-}
-
-#radio2:checked ~ .primeiro {
-  margin-left: -25%;
-}
-
-#radio3:checked ~ .primeiro {
-  margin-left: -50%;
-}
-
-#radio4:checked ~ .primeiro {
-  margin-left: -75%;
-}
-
-/* @media screen and (max-width: 900px) {
-  .img-desktop {
-    display: none;
-  }
-
-  .img-mobile {
-    display: block;
-  }
-} */
-
-/* - - - - - */
 </style>

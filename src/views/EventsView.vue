@@ -6,194 +6,190 @@
         <li>
           <router-link to="/eventRegister">Cadastrar eventos</router-link>
         </li>
-
       </ul>
     </div>
-    
-    <div class="container-event" v-for="event in events" :key="event.id" v-if="events.length != 0">
-      <img src="" alt="imagem">
+
+    <div
+      class="container-event"
+      v-for="event in events"
+      :key="event.id"
+      v-if="events.length != 0"
+    >
+      <img src="" alt="imagem" />
       <div class="events-info">
         <h2>{{ event.title.toUpperCase() }}</h2>
         <p>{{ event.description }}</p>
-      <button class="button">Participar</button>
-
+        <button class="button">Participar</button>
       </div>
     </div>
 
     <div v-else>
       <div class="dot-spinner">
-      <div class="dot-spinner__dot"></div>
-      <div class="dot-spinner__dot"></div>
-      <div class="dot-spinner__dot"></div>
-      <div class="dot-spinner__dot"></div>
-      <div class="dot-spinner__dot"></div>
-      <div class="dot-spinner__dot"></div>
-      <div class="dot-spinner__dot"></div>
-      <div class="dot-spinner__dot"></div>
-</div>
+        <div class="dot-spinner__dot"></div>
+        <div class="dot-spinner__dot"></div>
+        <div class="dot-spinner__dot"></div>
+        <div class="dot-spinner__dot"></div>
+        <div class="dot-spinner__dot"></div>
+        <div class="dot-spinner__dot"></div>
+        <div class="dot-spinner__dot"></div>
+        <div class="dot-spinner__dot"></div>
+      </div>
     </div>
   </main>
 </template>
 
 <script setup>
-  import {ref, onMounted } from 'vue'
-  import AuthService from '../services/AuthServices';
-  import axios from 'axios';
+import { ref, onMounted } from "vue";
+import AuthService from "../services/AuthServices";
+import axios from "axios";
 
-  const baseURL = 'https://apiconnectyouth.up.railway.app/api'
-  let events = ref([]);
-  let showMenu = AuthService.getToken()
+const baseURL = "https://apiconnectyouth.up.railway.app/api";
+let events = ref([]);
+let showMenu = AuthService.getToken();
 
-  async function getEvents() {
-    try {
-      const req = await axios.get(`${baseURL}/events`)
-      
-      events.value = req.data
+async function getEvents() {
+  try {
+    const req = await axios.get(`${baseURL}/events`);
 
-
-    } catch (error) {
-      console.log(error);
-    }
-    
-    
-
-
+    events.value = req.data;
+    console.log(events.value);
+  } catch (error) {
+    console.log(error);
   }
-  onMounted(() => {
-    getEvents()
-  })
-
-
+}
+onMounted(() => {
+  getEvents();
+});
 </script>
 
 <script>
-  export default {
-      name: 'home'
-    }
-
-    
+export default {
+  name: "home",
+};
 </script>
-  
+
 <style scoped>
-  main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding-top: 4.5em;
-  }
-  .container-event {
-    width: 60%;
-    height: 500px;
-    box-shadow: 0 0 2px 1px gray;
-    border-radius: 0.4rem;
-    display: flex;
-    padding: .8em;
-    margin: 0 0 2em 10%;
-  }
-
-  .container-event img, .events-info {
-    width: 50%;
-  }
-
-  .events-info {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 5fr 1fr;
-    text-align: center;
-    border-left: 1px solid rgb(173, 173, 173);
-  }
-
-  .menu {
-    position: fixed;
-    left: 2em;
-    top: 8em;
-    width: 20%;
-    height: 500px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1em;
-  }
-
-  .menu ul {
-    list-style: none;
-  }
-  .menu a {
-    padding: .2em;
-    font-size: 1.1rem;
-    cursor: pointer;
-    color: grey;
-    text-decoration: none;
-  }
-
-  .menu a:hover {
-    color: black;
-  }
-
-
-  /* Button  */
-  .button {
- --color: #00A97F;
- padding: 0.8em 1.7em;
- background-color: transparent;
- border-radius: .3em;
- position: relative;
- overflow: hidden;
- cursor: pointer;
- transition: .5s;
- font-weight: 400;
- font-size: 17px;
- border: 1px solid;
- font-family: inherit;
- text-transform: uppercase;
- color: var(--color);
- z-index: 1;
- max-width: 300px;
- min-width: 250px;
- margin: auto;
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 4.5em;
+}
+.container-event {
+  width: 60%;
+  height: 500px;
+  box-shadow: 0 0 2px 1px gray;
+  border-radius: 0.4rem;
+  display: flex;
+  padding: 0.8em;
+  margin: 0 0 2em 10%;
 }
 
-.button::before, .button::after {
- content: '';
- display: block;
- width: 50px;
- height: 50px;
- transform: translate(-50%, -50%);
- position: absolute;
- border-radius: 50%;
- z-index: -1;
- background-color: var(--color);
- transition: 1s ease;
+.container-event img,
+.events-info {
+  width: 50%;
+}
+
+.events-info {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 5fr 1fr;
+  text-align: center;
+  border-left: 1px solid rgb(173, 173, 173);
+}
+
+.menu {
+  position: fixed;
+  left: 2em;
+  top: 8em;
+  width: 20%;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+}
+
+.menu ul {
+  list-style: none;
+}
+.menu a {
+  padding: 0.2em;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: grey;
+  text-decoration: none;
+}
+
+.menu a:hover {
+  color: black;
+}
+
+/* Button  */
+.button {
+  --color: #00a97f;
+  padding: 0.8em 1.7em;
+  background-color: transparent;
+  border-radius: 0.3em;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.5s;
+  font-weight: 400;
+  font-size: 17px;
+  border: 1px solid;
+  font-family: inherit;
+  text-transform: uppercase;
+  color: var(--color);
+  z-index: 1;
+  max-width: 300px;
+  min-width: 250px;
+  margin: auto;
+}
+
+.button::before,
+.button::after {
+  content: "";
+  display: block;
+  width: 50px;
+  height: 50px;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  border-radius: 50%;
+  z-index: -1;
+  background-color: var(--color);
+  transition: 1s ease;
 }
 
 .button::before {
- top: -1em;
- left: -1em;
+  top: -1em;
+  left: -1em;
 }
 
 .button::after {
- left: calc(100% + 1em);
- top: calc(100% + 1em);
+  left: calc(100% + 1em);
+  top: calc(100% + 1em);
 }
 
-.button:hover::before, .button:hover::after {
- height: 410px;
- width: 410px;
+.button:hover::before,
+.button:hover::after {
+  height: 410px;
+  width: 410px;
 }
 
 .button:hover {
- color: white;
+  color: white;
 }
 
 .button:active {
- filter: brightness(.8);
+  filter: brightness(0.8);
 }
 
 /* Loading */
 .dot-spinner {
   --uib-size: 2.8rem;
-  --uib-speed: .9s;
+  --uib-speed: 0.9s;
   --uib-color: #183153;
   position: relative;
   display: flex;
@@ -215,7 +211,7 @@
 }
 
 .dot-spinner__dot::before {
-  content: '';
+  content: "";
   height: 20%;
   width: 20%;
   border-radius: 50%;
@@ -294,6 +290,4 @@
     opacity: 1;
   }
 }
-
-
 </style>

@@ -3,6 +3,9 @@ export default {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      width: {
+        wCard: "600px",
+      },
       spacing: {
         "10%": "10%",
         "20%": "20%",
